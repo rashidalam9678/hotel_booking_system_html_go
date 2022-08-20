@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker-bs5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/notie/dist/notie.min.css"
+    />
+    <link rel="stylesheet" href="/html-source/static/css/style.css">
+  </head>
+  <body>
+    <!-- navbar -->
+
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top carousel-fade"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about.html">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Rooms
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/general.html">Single Room</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/major.html">Major's Suite</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/reservation.html">Book Now</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- carousel -->
+
+    <div
+      id="carouselExampleIndicators"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="3000">
+          <img
+            src="/static/images/outside.png"
+            class="d-block w-100"
+            alt="image1"
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Second slide label</h5>
+            <p>Some representative placeholder content for the second slide.</p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+          <img
+            src="static/images/tray.png"
+            class="d-block w-100"
+            alt="image2"
+          />
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+          <img
+            src="/static/images/woman-laptop.png"
+            class="d-block w-100"
+            alt="image3"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- content -->
+    <div class="container">
+      <div class="row">
+        <h1 class="mt-5 text-center">Welcome to Dokun Rooms</h1>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus,
+          perferendis nam? Tempora iure eum magnam vero consequatur aspernatur
+          itaque ratione rem commodi animi quos suscipit, ab blanditiis aperiam,
+          consectetur fugiat quasi ipsum quas soluta cum. Pariatur reprehenderit
+          doloribus perferendis eveniet cum consequuntur commodi dicta
+          repellendus nesciunt. Voluptatibus inventore fugiat temporibus? Lorem
+          ipsum dolor sit amet consectetur, adipisicing elit. Id nostrum ex enim
+          consectetur odio sapiente qui maiores sunt consequatur illum, aliquid
+          et quam perspiciatis, consequuntur quasi, eos provident velit odit?
+        </p>
+      </div>
+      <div class="row text-center">
+        <div class="col">
+          <a href="/make-reservation" class="btn btn-success">
+            Make Reservation Now</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="row mt-5 myfooter">
+      <div class="col">left</div>
+      <div class="col">middle</div>
+      <div class="col">right</div>
+    </div>
+
+    <!-- javascript -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+      integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/notie"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js"></script>
+
+  </body>
+</html>
