@@ -11,4 +11,5 @@ type AppConfig struct{
 	TemplateCache map[string] *template.Template
 	InProduction bool
 	Session *scs.SessionManager
+	CSRFToken string
 }

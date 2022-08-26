@@ -8,12 +8,9 @@
   .availability-button {
     max-width: 50%;
   }
-  .myNavbar {
+  /* .myNavbar {
     z-index: -1;
-  }
-  #reservation-dates-modal {
-        z-index: -1;
-    }
+  } */
 
   .room-img{
     max-width: 50%;

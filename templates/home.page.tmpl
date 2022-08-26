@@ -1,16 +1,87 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>This is dokun rooms</h1>
-                <img src="/static/images/outside.png" alt="Girl in a jacket" width="800" height="500">
-            </div>
-            <div class="col">
-                <a href="/about">About Page </a>
-            </div>
+  <!-- carousel -->
+
+    <div
+      id="carouselExampleIndicators"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="3000">
+          <img
+            src="/static/images/outside.png"
+            class="d-block w-100"
+            alt="image1"
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Second slide label</h5>
+            <p>Some representative placeholder content for the second slide.</p>
+          </div>
         </div>
+        <div class="carousel-item" data-bs-interval="3000">
+          <img
+            src="static/images/tray.png"
+            class="d-block w-100"
+            alt="image2"
+          />
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+          <img
+            src="/static/images/woman-laptop.png"
+            class="d-block w-100"
+            alt="image3"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- content -->
+    <div class="container">
+      <div class="row">
+        <h1 class="mt-5 text-center">Welcome to Dokun Rooms</h1>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus,
+          perferendis nam? Tempora iure eum magnam vero consequatur aspernatur
+          itaque ratione rem commodi animi quos suscipit, ab blanditiis aperiam,
+          consectetur fugiat quasi ipsum quas soluta cum. Pariatur reprehenderit
+          doloribus perferendis eveniet cum consequuntur commodi dicta
+          repellendus nesciunt. Voluptatibus inventore fugiat temporibus? Lorem
+          ipsum dolor sit amet consectetur, adipisicing elit. Id nostrum ex enim
+          consectetur odio sapiente qui maiores sunt consequatur illum, aliquid
+          et quam perspiciatis, consequuntur quasi, eos provident velit odit?
+        </p>
+      </div>
+      <div class="row text-center">
+        <div class="col">
+          <a href="/make-reservation" class="btn btn-success">
+            Make Reservation Now</a
+          >
+        </div>
+      </div>
     </div>
     
 {{end}}

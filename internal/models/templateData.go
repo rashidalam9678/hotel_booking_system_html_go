@@ -1,5 +1,7 @@
 package models
 
+import "github.com/rashidalam9678/hotel_booking_system_html_go/internal/forms"
+
 //TemplateData holds the data which has to be sent to templates
 type TemplateData struct{
 	StringMap map[string]string
@@ -10,4 +12,5 @@ type TemplateData struct{
 	Error string
 	Warning string
 	Flash string
+	Form *forms.Form
 }

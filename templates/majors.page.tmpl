@@ -1,0 +1,61 @@
+{{template "base" .}}
+
+{{define "content"}}
+      <!-- content -->
+    <div class="container">
+      <div class="row">
+        <div class="col ">
+          <img src="/static/images/marjors-suite.png" class="img-fluid mx-auto d-block img-thumbnail room-img" alt="generals-quarters">
+        </div>
+      </div>
+      <div class="row">
+        <h1 class="mt-5 text-center">Major Suite</h1> 
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus,
+          perferendis nam? Tempora iure eum magnam vero consequatur aspernatur
+          itaque ratione rem commodi animi quos suscipit, ab blanditiis aperiam,
+          consectetur fugiat quasi ipsum quas soluta cum. Pariatur reprehenderit
+          doloribus perferendis eveniet cum consequuntur commodi dicta
+          repellendus nesciunt. Voluptatibus inventore fugiat temporibus?
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id nostrum ex enim consectetur odio sapiente qui maiores sunt consequatur illum, aliquid et quam perspiciatis, consequuntur quasi, eos provident velit odit?
+        </p>
+      </div>
+      <div class="row text-center">
+        <div class="col">
+          <a href="#!" class="btn btn-success" id="check-availability-button">
+            Check Availability</a
+          >
+        </div>
+      </div>
+    </div>
+    
+{{end}}
+
+{{define "js"}}
+       <script>   
+        document.getElementById("check-availability-button").addEventListener("click", function () {
+        let html = `
+        <form id="check-availability-form" action="" method="" novalidate class="needs-validation">
+            <div class="row">
+                <div class="col">
+                    <div class="row" id="reservation-dates-modal">
+                        <div class="col">
+                            <input disabled required class="form-control" type="text" name="start" id="start" placeholder="Arrival">
+                        </div>
+                        <div class="col">
+                            <input disabled required class="form-control" type="text" name="end" id="end" placeholder="Departure">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        `;
+        attention.custom({
+          msg: html,
+          title: "Choose your dates",
+        });
+      })
+       </script>
+
+{{end}}

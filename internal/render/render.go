@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
-
-	"github.com/rashidalam9678/hotel_booking_system_html_go/pkg/config"
-	"github.com/rashidalam9678/hotel_booking_system_html_go/pkg/models"
+	"github.com/justinas/nosurf"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/config"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/models"
 )
 
 var app *config.AppConfig
@@ -17,8 +17,14 @@ func NewTemplates(a *config.AppConfig){
 	app= a
 }
 
+//AddDefaultData add default data to all for all templates
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData{
+	td.CSRFToken=nosurf.Token(r)
+	return td
+}
+
 // RenderTemplate is function which can parse the given template and render it to browser
-func RenderTemplate(w http.ResponseWriter, tmpl string,td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter,r *http.Request, tmpl string,td *models.TemplateData) {
 	var tc map[string]*template.Template
 	if app.UseCache{
 		tc= app.TemplateCache
@@ -30,6 +36,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string,td *models.TemplateData) 
 		log.Fatal("couldn't get the template cache")
 	}
 	buf := new(bytes.Buffer)
+	td= AddDefaultData(td,r)
 	err:= t.Execute(buf, td)
 	if err!=nil{
 		log.Println(err)

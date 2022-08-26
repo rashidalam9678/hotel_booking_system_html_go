@@ -1,15 +1,17 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/rashidalam9678/hotel_booking_system_html_go/pkg/config"
-	"github.com/rashidalam9678/hotel_booking_system_html_go/pkg/handlers"
-	"github.com/rashidalam9678/hotel_booking_system_html_go/pkg/render"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/config"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/handlers"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/models"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/render"
 )
 const PortNumber= ":8080"
 var app config.AppConfig
@@ -18,6 +20,9 @@ var session *scs.SessionManager
 
 
 func main(){
+	// what kind of data we will store in session
+	gob.Register(models.Reservation{})
+
 	app.InProduction=false
 	session= scs.New()
 	session.Lifetime= 24*time.Hour
