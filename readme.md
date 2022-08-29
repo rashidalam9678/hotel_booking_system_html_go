@@ -8,3 +8,5 @@ built in go version 1.18 and extensively uses go html templates
 - uses [notie] (github.com/jaredreich/notie) for custom alert
 - uses [date picker](github.com/mymth/vanillajs-datepicker) for custom date picker
 - uses [govalidator](github.com/asaskevich/govalidator) for serverside email validation
+- uses [pgx](github.com/jackc/pgx) as a dababase connection driver
+- uses [soda] (gobuffalo.io/documentation/database/pop/) for database migration purposes

@@ -5,17 +5,22 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/config"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/handlers"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/helpers"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/models"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/render"
 )
 const PortNumber= ":8080"
 var app config.AppConfig
 var session *scs.SessionManager
+var infoLog *log.Logger
+var errorLog *log.Logger
+var warningLog *log.Logger
 
 
 
@@ -31,6 +36,14 @@ func main(){
 	session.Cookie.SameSite=http.SameSiteLaxMode
 
 	app.Session= session
+
+	infoLog= log.New(os.Stdout,"INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog= infoLog
+
+	errorLog = log.New(os.Stdout,"ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog= errorLog
+
+
 	
 
 	
@@ -44,6 +57,7 @@ func main(){
 	repo:= handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
+	helpers.NewHelpers(&app)
 
 
 	// http.HandleFunc("/", handlers.Repo.Home)
@@ -57,8 +71,5 @@ func main(){
 	err= srv.ListenAndServe()
 	if err!=nil{
 		log.Fatal("Unable to start the server")
-	}
-
-	
-	
+	}	
 }
