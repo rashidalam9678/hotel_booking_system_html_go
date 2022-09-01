@@ -14,19 +14,23 @@ import (
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/helpers"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/models"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/render"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/driver"
 )
 const PortNumber= ":8080"
 var app config.AppConfig
 var session *scs.SessionManager
 var infoLog *log.Logger
 var errorLog *log.Logger
-var warningLog *log.Logger
+// var warningLog *log.Logger
 
 
 
 func main(){
 	// what kind of data we will store in session
 	gob.Register(models.Reservation{})
+	gob.Register(models.User{})
+	gob.Register(models.Room{})
+	gob.Register(models.Restriction{})
 
 	app.InProduction=false
 	session= scs.New()
@@ -54,14 +58,22 @@ func main(){
 	app.TemplateCache=tc
 	app.UseCache= false
 
-	repo:= handlers.NewRepo(&app)
+	
+
+	log.Println("starting connection to database")
+	db,err:= driver.ConnectSQL("host=localhost port=5432 dbname=hotel_bookings user=mr.mra password=")
+	if err != nil{
+		log.Fatal("can not connect to database. Dying.....")
+	}
+	defer db.SQL.Close()
+
+	repo:= handlers.NewRepo(&app,db)
 	handlers.NewHandlers(repo)
-	render.NewTemplates(&app)
+	render.NewRenderer(&app)
 	helpers.NewHelpers(&app)
 
+	log.Println("succesfully connected to data base")
 
-	// http.HandleFunc("/", handlers.Repo.Home)
-	// http.HandleFunc("/about", handlers.Repo.About)
 	fmt.Println("Started Serven on: http://localhost:8080 ")
 
 	srv:= &http.Server{

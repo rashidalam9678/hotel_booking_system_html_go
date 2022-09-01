@@ -19,7 +19,7 @@ const maxIdleDbConn=5
 const maxDbLifeTime= 5*time.Minute
 
 // ConnectSQL creates database pool for postgres
-func connectSQL(dns string)(*DB ,error){
+func ConnectSQL(dns string)(*DB ,error){
 	db, err:= newDatabase(dns)
 	if err !=nil{
 		panic(err)

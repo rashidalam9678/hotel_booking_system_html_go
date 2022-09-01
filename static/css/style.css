@@ -8,11 +8,14 @@
   .availability-button {
     max-width: 50%;
   }
-  /* .myNavbar {
+  .myNavbar {
     z-index: -1;
-  } */
+  }
 
   .room-img{
     max-width: 50%;
   }  
+  .notie-container{
+    z-index: 100;
+  }
  

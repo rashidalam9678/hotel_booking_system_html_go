@@ -12,8 +12,8 @@ import (
 )
 
 var app *config.AppConfig
-// NewTemplates sets the config for the new templates
-func NewTemplates(a *config.AppConfig){
+// NewRenderer sets the config for the new templates
+func NewRenderer(a *config.AppConfig){
 	app= a
 }
 
@@ -23,8 +23,8 @@ func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateDa
 	return td
 }
 
-// RenderTemplate is function which can parse the given template and render it to browser
-func RenderTemplate(w http.ResponseWriter,r *http.Request, tmpl string,td *models.TemplateData) {
+// Template is function which can parse the given template and render it to browser
+func Template(w http.ResponseWriter,r *http.Request, tmpl string,td *models.TemplateData) {
 	var tc map[string]*template.Template
 	if app.UseCache{
 		tc= app.TemplateCache
