@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/alexedwards/scs/v2"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/models"
 )
 
 type AppConfig struct{
@@ -16,4 +17,5 @@ type AppConfig struct{
 	InProduction bool
 	Session *scs.SessionManager
 	CSRFToken string
+	MailChan chan models.MailData
 }

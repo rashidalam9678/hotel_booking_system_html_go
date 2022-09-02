@@ -60,12 +60,25 @@ func main(){
 
 	
 
+
+
 	log.Println("starting connection to database")
 	db,err:= driver.ConnectSQL("host=localhost port=5432 dbname=hotel_bookings user=mr.mra password=")
 	if err != nil{
 		log.Fatal("can not connect to database. Dying.....")
 	}
 	defer db.SQL.Close()
+
+	mailChan:= make(chan models.MailData)
+	app.MailChan=mailChan
+
+	defer close(app.MailChan)
+	ListenForMail()
+
+	fmt.Println("starting mail listener")
+
+	
+
 
 	repo:= handlers.NewRepo(&app,db)
 	handlers.NewHandlers(repo)

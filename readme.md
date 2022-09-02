@@ -10,3 +10,6 @@ built in go version 1.18 and extensively uses go html templates
 - uses [govalidator](github.com/asaskevich/govalidator) for serverside email validation
 - uses [pgx](github.com/jackc/pgx) as a dababase connection driver
 - uses [soda] (gobuffalo.io/documentation/database/pop/) for database migration purposes
+- uses [go-simple-mail] (github.com/xhit/go-simple-mail) for sending mails
+- uses [mailhog] (https://github.com/mailhog/MailHog) for dummy testing server
+- uses [foundation-templates](https://get.foundation/emails.html) for email template
