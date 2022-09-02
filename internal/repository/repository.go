@@ -11,4 +11,6 @@ type Database interface{
 	InsertReservation(res models.Reservation) (int,error)
 	InsertRoomRestriction( res models.RoomRestriction)(error)
 	SearchAvailablityByDatesByRoomId(start time.Time,end time.Time , roomId int)(bool, error)
+	SearchAvailablityForAllRooms(start, end time.Time) ([]models.Room, error)
+	GetRoomById(id int)(models.Room, error)
 }
