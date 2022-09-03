@@ -13,4 +13,5 @@ type TemplateData struct{
 	Warning string
 	Flash string
 	Form *forms.Form
+	IsAuthenticated int
 }

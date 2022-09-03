@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -76,7 +77,7 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 	stringMap["end_date"]=ed
 
 	if !ok {
-		helpers.ServerError(w,errors.New("Can not get reservation details from session"))
+		helpers.ServerError(w,errors.New("can't get reservation details from session"))
 		return
 	}
 	data := make(map[string]interface{})
@@ -397,3 +398,67 @@ func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) 
 		StringMap: stringMap,
 	})
 }
+
+
+// ShowLogin displays the login page
+func (m *Repository)ShowLogin(w http.ResponseWriter, r *http.Request){
+	render.Template(w, r, "login.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+
+}
+func (m *Repository)PostShowLogin(w http.ResponseWriter, r *http.Request){
+	_= m.App.Session.RenewToken(r.Context())
+
+	err:= r.ParseForm()
+	if err != nil{
+		helpers.ServerError(w,err)
+		return
+	}
+
+	form:= forms.New(r.Form)
+
+	email := r.Form.Get("email")
+	password:= r.Form.Get("password")
+
+	form.Required("email","password")
+	form.IsEmail("email")
+
+	if !form.Valid(){
+		//take user back to page
+		render.Template(w,r,"login.page.tmpl",&models.TemplateData{
+			Form:form,
+		})
+		return
+	}
+	 id,_,err:=m.DB.Authenticate(email,password)
+	 if err!= nil{
+		log.Println(err)
+		m.App.Session.Put(r.Context(),"error","Invalid credentials")
+		http.Redirect(w,r,"/user/login",http.StatusSeeOther)
+		return
+	 }
+
+	m.App.Session.Put(r.Context(),"user_id",id)
+	m.App.Session.Put(r.Context(),"success","Logged in successfully")
+	http.Redirect(w,r,"/",http.StatusSeeOther)
+
+}
+
+
+func (m *Repository) Logout(w http.ResponseWriter, r *http.Request){
+	err:=m.App.Session.Destroy(r.Context())
+	if err !=nil{
+		helpers.ServerError(w,err)
+	}
+	err=m.App.Session.RenewToken(r.Context())
+	if err !=nil{
+		helpers.ServerError(w,err)
+	}
+	http.Redirect(w,r,"/user/login",http.StatusSeeOther)
+}
+
+func (m *Repository) AdminDashboard(w http.ResponseWriter, r *http.Request){
+	render.Template(w,r,"admin-dahsboard.page.tmpl",&models.TemplateData{})
+}
+
