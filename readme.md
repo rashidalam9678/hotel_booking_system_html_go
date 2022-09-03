@@ -13,3 +13,10 @@ built in go version 1.18 and extensively uses go html templates
 - uses [go-simple-mail] (github.com/xhit/go-simple-mail) for sending mails
 - uses [mailhog] (https://github.com/mailhog/MailHog) for dummy testing server
 - uses [foundation-templates](https://get.foundation/emails.html) for email template
+- uses [admin-template] (https://github.com/BootstrapDash/RoyalUI-Free-Bootstrap-Admin-Template) for admin template
+
+
+# to dos
+1- add a good email template
+2- edit the navbar and pictures
+3- edit the admin template
