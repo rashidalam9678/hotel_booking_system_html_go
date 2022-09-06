@@ -11,9 +11,6 @@
   .my-navbar {
     z-index: 2;
   }
-  .notie-container{
-    z-index: 10000;
-  }
   .room-img{
     max-width: 50%;
   }  

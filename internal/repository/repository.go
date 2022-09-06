@@ -16,4 +16,10 @@ type Database interface{
 	GetUserById(id int)(models.User, error)
 	UpdateUserById(u models.User)( error)
 	Authenticate(email,testPassword string)(int, string,error)
+	AllReservations() ([]models.Reservation, error)
+	AllNewReservations() ([]models.Reservation, error)
+	GetReservationById(id int) (models.Reservation, error) 
+	UpdateReservation(u models.Reservation)( error)
+	DeleteReservationById(id int)( error)
+	UpdateProcessed(id,processed int)( error)
 }

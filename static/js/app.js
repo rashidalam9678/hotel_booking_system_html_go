@@ -1,4 +1,4 @@
-let attention = Prompt();
+
 
         // function to validate the forms
         function formValidation() {
@@ -24,33 +24,6 @@ let attention = Prompt();
           });
         }
         formValidation();
-
-        
-      
-
-      
-
-      // Custom Alert
-      function notify(msg, msgType) {
-        notie.alert({
-          type: msgType,
-          text: msg,
-        });
-      }
-
-       
-
-
-      // Modal
-      function notifyModal(tlt, txt, icn, cbt) {
-        Swal.fire({
-          title: tlt,
-          text: txt,
-          icon: icn,
-          confirmButtonText: cbt,
-        });
-      }
-
       
       // Prompt
       function Prompt() {
@@ -117,11 +90,6 @@ let attention = Prompt();
             didOpen: () => {
               if (c.didOpen !== undefined) {
                                 c.didOpen();
-                            }
-            },
-            preConfirm: () => {
-              if (c.preConfirm !== undefined) {
-                                c.preConfirm();
                             }
             },
           });

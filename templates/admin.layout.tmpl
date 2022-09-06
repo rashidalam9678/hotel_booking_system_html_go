@@ -18,6 +18,25 @@
   <link rel="stylesheet" href="/static/admin/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="/static/admin/images/favicon.png" />
+  <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/notie/dist/notie.min.css"
+    />
+
+  <style>
+    .content-wrapper{
+        background:white
+      }
+     label{
+      font-weight:bold;
+     }
+     .notie-container{
+        z-index:50000;
+      }
+
+
+   </style>
 
   {{block "css" .}}
   {{end}}
@@ -227,6 +246,44 @@
   <!-- Custom js for this page-->
   <script src="/static/admin/js/dashboard.js"></script>
   <!-- End custom js for this page-->
+
+  <script src="https://unpkg.com/notie"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/js/app.js"> </script>
+
+  <script> 
+        let attention = Prompt();
+
+          // Modal
+        function notifyModal(tlt, txt, icn, cbt) {
+           Swal.fire({
+            title: tlt,
+           text: txt,
+           icon: icn,
+           confirmButtonText: cbt,
+          });
+         }
+
+        function notify(msg, msgType) {
+            notie.alert({
+            text: msg,
+            type: msgType,
+            });
+          }
+
+        {{with .Error}}
+            notify("{{.}}", "error");
+        {{end}}
+
+        {{with .Flash}}
+        notify("{{.}}", "success");
+        {{end}}
+
+        {{with .Warning}}
+        notify("{{.}}", "warning");
+        {{end}}
+  </script>
 
     {{block "js" .}}
     {{end}}

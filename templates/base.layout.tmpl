@@ -28,6 +28,11 @@
       href="https://unpkg.com/notie/dist/notie.min.css"
     />
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <style>
+        .notie-container{
+            z-index:50000;
+          }
+    </style>
 
   </head>
   <body>
@@ -142,24 +147,37 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/static/js/app.js"> </script>
     <script>
+        let attention = Prompt();
+        // Modal
+        function notifyModal(tlt, txt, icn, cbt) {
+           Swal.fire({
+            title: tlt,
+           text: txt,
+           icon: icn,
+           confirmButtonText: cbt,
+          });
+         }
+
         function notify(msg, msgType) {
-        notie.alert({
-          text: msg,
-          type: msgType,
-        });
-      }
+            notie.alert({
+            text: msg,
+            type: msgType,
+            });
+          }
+
         {{with .Error}}
             notify("{{.}}", "error");
         {{end}}
 
         {{with .Flash}}
-        notify("{{.}}", "success");
+            notify("{{.}}", "success");
         {{end}}
 
         {{with .Warning}}
-        notify("{{.}}", "warning");
+            notify("{{.}}", "warning");
         {{end}}
     </script>
+
     {{block "js" .}}
     {{end}}
     

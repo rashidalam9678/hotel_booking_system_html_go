@@ -26,6 +26,29 @@ var errorLog *log.Logger
 
 
 func main(){
+	db,err:= run()
+	if err!= nil{
+		log.Fatal(err)
+	}
+
+	defer db.SQL.Close()
+	defer close(app.MailChan)
+
+	fmt.Println("Started Serven on: http://localhost:8080 ")
+
+	srv:= &http.Server{
+		Addr: PortNumber,
+		Handler:routes(&app),
+	}
+	err= srv.ListenAndServe()
+	if err!=nil{
+		log.Fatal("Unable to start the server")
+	}	
+}
+
+
+func run() (*driver.DB ,error){
+
 	// what kind of data we will store in session
 	gob.Register(models.Reservation{})
 	gob.Register(models.User{})
@@ -67,12 +90,11 @@ func main(){
 	if err != nil{
 		log.Fatal("can not connect to database. Dying.....")
 	}
-	defer db.SQL.Close()
+	
 
 	mailChan:= make(chan models.MailData)
 	app.MailChan=mailChan
 
-	defer close(app.MailChan)
 	ListenForMail()
 
 	fmt.Println("starting mail listener")
@@ -87,14 +109,6 @@ func main(){
 
 	log.Println("succesfully connected to data base")
 
-	fmt.Println("Started Serven on: http://localhost:8080 ")
+	return db, nil
 
-	srv:= &http.Server{
-		Addr: PortNumber,
-		Handler:routes(&app),
-	}
-	err= srv.ListenAndServe()
-	if err!=nil{
-		log.Fatal("Unable to start the server")
-	}	
 }
