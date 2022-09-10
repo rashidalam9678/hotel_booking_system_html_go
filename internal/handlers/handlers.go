@@ -408,6 +408,43 @@ func (m *Repository)ShowLogin(w http.ResponseWriter, r *http.Request){
 	})
 
 }
+// ShowSignUp displays the login page
+func (m *Repository)ShowSignup(w http.ResponseWriter, r *http.Request){
+	render.Template(w, r, "signup.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+}
+
+func (m *Repository) PostShowSignup( w http.ResponseWriter, r *http.Request) {
+	_= m.App.Session.RenewToken(r.Context())
+	err:= r.ParseForm()
+	if err != nil{
+		helpers.ServerError(w,err)
+		return
+	}
+
+	form:= forms.New(r.Form)
+
+	// email := r.Form.Get("email")
+	// password:= r.Form.Get("password")
+
+
+	form.Required("email","password")
+	form.IsEmail("email")
+
+	if !form.Valid(){
+		//take user back to page
+		render.Template(w,r,"login.page.tmpl",&models.TemplateData{
+			Form:form,
+		})
+		return
+	}
+
+
+}
+
+
+
 func (m *Repository)PostShowLogin(w http.ResponseWriter, r *http.Request){
 	_= m.App.Session.RenewToken(r.Context())
 
@@ -432,6 +469,7 @@ func (m *Repository)PostShowLogin(w http.ResponseWriter, r *http.Request){
 		})
 		return
 	}
+
 	 id,_,err:=m.DB.Authenticate(email,password)
 	 if err!= nil{
 		log.Println(err)

@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/gob"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,11 +11,11 @@ import (
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/config"
+	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/driver"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/handlers"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/helpers"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/models"
 	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/render"
-	"github.com/rashidalam9678/hotel_booking_system_html_go/internal/driver"
 )
 const PortNumber= ":8080"
 var app config.AppConfig
@@ -55,7 +56,19 @@ func run() (*driver.DB ,error){
 	gob.Register(models.Room{})
 	gob.Register(models.Restriction{})
 
-	app.InProduction=false
+	UseCache := flag.Bool("cache",true,"Use Template Cache")
+	InProduction :=flag.Bool("production",true,"Application is in production")
+	dbName :=flag.String("dbname","","database name")
+	dbHost :=flag.String("dbhost","localhost","database host")
+	dbUser :=flag.String("dbuser","","database user")
+	dbPassword :=flag.String("dbpassword","","database password")
+	dbPort :=flag.String("dbport","5432","database port")
+	dbSsl :=flag.String("dbssl","disabled","database ssl setting (disable, prefer, require) ")
+
+	flag.Parse()
+
+	app.InProduction= *InProduction
+
 	session= scs.New()
 	session.Lifetime= 24*time.Hour
 	session.Cookie.Secure=app.InProduction
@@ -79,14 +92,16 @@ func run() (*driver.DB ,error){
 		log.Fatal(err)
 	}
 	app.TemplateCache=tc
-	app.UseCache= false
+	app.UseCache= *UseCache
+	// app.UseCache= true
 
 	
 
-
+	connectionString:= fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=%s",*dbHost, *dbPort, *dbName, *dbUser, *dbPassword, *dbSsl)
 
 	log.Println("starting connection to database")
-	db,err:= driver.ConnectSQL("host=localhost port=5432 dbname=hotel_bookings user=mr.mra password=")
+	// db,err:= driver.ConnectSQL("host=localhost port=5432 dbname=hotel_bookings user=mr.mra password=")
+	db,err:= driver.ConnectSQL(connectionString)
 	if err != nil{
 		log.Fatal("can not connect to database. Dying.....")
 	}

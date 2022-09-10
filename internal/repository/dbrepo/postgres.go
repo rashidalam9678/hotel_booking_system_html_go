@@ -410,4 +410,29 @@ func (m *postgresDBRepo) UpdateProcessed(id,processed int)( error){
 
 
 
+//InsertUser insert the New User in users table
+func (m *postgresDBRepo) InsertUser(user models.User) (int, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	var newId int
+
+	stmt := `insert into reservations (first_name, last_name, email, password,created_at, updated_at ) values 
+		($1,$2,$3,$4,$5,$6) returning id	`
+	err := m.DB.QueryRowContext(ctx, stmt,
+		user.FirstName,
+		user.LastName,
+		user.Email,
+		user.Password,
+		time.Now(),
+		time.Now(),
+	).Scan(&newId)
+
+	if err != nil {
+		return 0, err
+	}
+	return newId, nil
+}
+
+
+
 

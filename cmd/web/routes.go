@@ -31,11 +31,14 @@ func routes(app *config.AppConfig) http.Handler{
 	mux.Get("/reservation-summary",handlers.Repo.ReservationSummary)
 
 	mux.Get("/user/login",handlers.Repo.ShowLogin)
+	mux.Get("/user/signup",handlers.Repo.ShowSignup)
+	mux.Post("/user/signup",handlers.Repo.PostShowSignup)
+
 	mux.Post("/user/login",handlers.Repo.PostShowLogin)
 	mux.Get("/user/logout",handlers.Repo.Logout)
 
 	mux.Route("/admin",func(r chi.Router) {
-			r.Use(Auth)
+			// r.Use(Auth)
 			r.Get("/dashboard",handlers.Repo.AdminDashboard)
 			r.Get("/reservations-new",handlers.Repo.AdminNewReservations)
 			r.Get("/reservations-all",handlers.Repo.AdminAllReservations)
